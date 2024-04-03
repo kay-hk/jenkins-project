@@ -12,7 +12,7 @@
 
 The provided JCaSC configuration allows access to Docker CLI and AWS CLI. Modify as needed.
 
-- Navigate to /jenkins/jcasc
+- Navigate to **/jenkins/jcasc**
 - Run the following Docker commands to build your image:
 
 ```
@@ -27,7 +27,7 @@ docker push yourDockerhubUsername/projectName:projectTag
 
 ## Terraform
 
-- Navigate to /jenkins/terraform
+- Navigate to **/jenkins/terraform**
 - Paste in your SSH key directly into the directory, OR make sure to update the file source:
 
 ```
@@ -82,7 +82,7 @@ That's it! We got our credentials set up.
 - Scroll down to **GitHub Server**
 - Add **GitHub Server**
 - Give your server a name of your choosing
-- Under **Credentials**, click +Add, choose Jenkins provider
+- Under **Credentials**, click Add, choose Jenkins provider
 - Configure Credentials as follows:
 
 > Domain: Global credentials (unrestricted)<br>
@@ -101,6 +101,8 @@ That's it! We got our credentials set up.
 Your GitHub server is now configured. Let's set up some pipelines.
 
 ## Slack Notifications
+
+**This step is optional.**
 
 In order to set up Slack notifications, you need to create a Slack workspace to suit your needs.
 
@@ -138,6 +140,8 @@ Now Slack Notifications can be added to your projects as a post-build step.
 
 Jenkins can now communicate with your repository and run pipelines from the Jenkinsfile. You will be notified via Slack on your build actions.
 
+**Please head to /pipelines to see example files.**
+
 ## Webhooks
 
 In order to set up a webhook, so that Jenkins automatically detects code changes in our app, we can do the following:
@@ -156,5 +160,6 @@ Now your Jenkins will automatically build a new version of your application if i
 ## Considerations
 
 - Security might be of issue. Accessing Jenkins via HTTP is not ideal, and to further improve our infrastructure, we could look into reverse proxy.
+- Remote exec and sleep on Terraform are not the most elegant solutions, but the purpose of this pipeline was to be able to spin up Jenkins quickly and efficiently, where other users can access the interface within minutes.
 - JCasC can be as simple or as elaborate as the user/s desire. As we are using a public repository, we have not configured credentials/clouds/etc. within the JCaSC, which could speed up the setup.
 - You can use HashiCorp Cloud to store your .tfstate as well as the SSH key for easy shared workspace.
