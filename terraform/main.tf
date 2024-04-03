@@ -1,3 +1,7 @@
+#IP data
+data "http" "ssh_cidr" {
+  url = "https://ipv4.icanhazip.com"
+}
 data "aws_ami" "ubuntu" {
   // Gets the latest ubuntu AMI ID
   most_recent = true
@@ -68,14 +72,14 @@ resource "aws_security_group" "jenkins_sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["86.13.109.180/32"]
+    cidr_blocks = [var.cidr_block]
   }
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["86.13.109.180/32"]
+    cidr_blocks = ["${chomp(data.http.ssh_cidr.response_body)}/32"]
   }
 
   // Egress rules (outbound)
@@ -83,7 +87,7 @@ resource "aws_security_group" "jenkins_sg" {
     from_port       = 0
     to_port         = 0
     protocol        = -1
-    cidr_blocks     = ["0.0.0.0/0"]
+    cidr_blocks     = [var.cidr_block]
   }
 
   // Allow outbound access to ports 80 and 443 (HTTP and HTTPS)
@@ -91,13 +95,13 @@ resource "aws_security_group" "jenkins_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.cidr_block]
   }
 
   egress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.cidr_block]
   }
 }
