@@ -91,12 +91,12 @@ That's it! We got our credentials set up.
 > Secret: YOUR_GITHUB_ACCESS_TOKEN<br>
 > ID: GIT_ID<br>
 
-![credentials](credentials.png)
+![credentials](./images/credentials.png)
 
 - Click Add, then choose GIT_ID from the Credentials dropdown
 - Test Connection; you should see: `Credentials verified for user YOUR_USERNAME, rate limit: number`
 
-![github_server](github_server.png)
+![github_server](./images/github_server.png)
 
 Your GitHub server is now configured. Let's set up some pipelines.
 
@@ -108,7 +108,7 @@ Once your workspace is created:
 
 - Click on **More** -> **Automations**
 - Search for and add **Jenkins**
-  ![jenkins_slack](jenkins_slack.png)
+  ![jenkins_slack](./images/jenkins_slack.png)
 - Pick the channel you want Jenkins to post notofications to
 
 You will be presented with instructions on how to continue. We now switch to Jenkins:
@@ -116,7 +116,7 @@ You will be presented with instructions on how to continue. We now switch to Jen
 - Navigate to **Dashboard -> Manage Jenkins -> Plugins -> Available Plugins**
 - Search for and install the "**Slack Notification Plugin**"
 - After installation, navigate to **Dashboard -> Manage Jenkins -> System**
-  ![jenkins_slack_main](jenkins_slack_main.png)
+  ![jenkins_slack_main](./images/jenkins_slack_main.png)
 - Configure according to **Step 3** of Slack instructions
 - Test Connection; if successful, you will see `Success`
 
@@ -145,7 +145,7 @@ In order to set up a webhook, so that Jenkins automatically detects code changes
 - Navigate to the correct repository on GitHub
 - Settings -> Webhooks
 - Add Webhook
-  ![github_webhook](github_webhook.png)
+  ![github_webhook](./images/github_webhook.png)
 - Configure as follows:
   > Payload URL: http://YOUR_PUBLIC_DNS:8080/github-webhook/<br>
   > Content type: application/json<br>
