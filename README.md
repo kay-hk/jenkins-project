@@ -4,6 +4,7 @@
 - DockerHub account
 - AWS account: IAM user with approproate permissions; key pair, created and saved to /jenkins/terraform folder
 - GitHub account and a GitHub access token with repo permissions
+- Slack account and a workspace
 
 ## Setting up your Jenkins
 
@@ -99,20 +100,43 @@ That's it! We got our credentials set up.
 
 Your GitHub server is now configured. Let's set up some pipelines.
 
-## Setting up the pipeline
+## Slack Notifications
 
-- Navigate to **Dashboard -> New Item -> Pipeline**
-- Give your pipeline a name, then press OK
-- In General, scroll down to Build Triggers and tick `GitHub hook trigger GITScm polling`
-- Scroll down to Pipeline, and from the Definition dropdown pick `Pipeline script from SCM`
+In order to set up Slack notifications, you need to create a Slack workspace to suit your needs.
+
+Once your workspace is created:
+
+- Click on **More** -> **Automations**
+- Search for and add **Jenkins**
+  ![jenkins_slack](jenkins_slack.png)
+- Pick the channel you want Jenkins to post notofications to
+
+You will be presented with instructions on how to continue. We now switch to Jenkins:
+
+- Navigate to **Dashboard -> Manage Jenkins -> Plugins -> Available Plugins**
+- Search for and install the "**Slack Notification Plugin**"
+- After installation, navigate to **Dashboard -> Manage Jenkins -> System**
+  ![jenkins_slack_main](jenkins_slack_main.png)
+- Configure according to **Step 3** of Slack instructions
+- Test Connection; if successful, you will see `Success`
+
+Now Slack Notifications can be added to your projects as a post-build step.
+
+## Setting up the project
+
+- Navigate to **Dashboard -> New Item -> Freestyle Project**
+- Give your project a name, then press OK
+- For **Source Code Management**, select **Git**
 - Configure with the following:
-  > SCM: Git<br>
   > Repository URL: YOUR_REPO_URL<br>
   > Credentials: YOUR_ID (**GitHub**)<br>
   > Branch Specifier: YOUR_BRANCH (or **main** by default)<br>
-- Scroll down and Save<br>
+- In **Build Triggers**, tick `GitHub hook trigger GITScm polling`
+- For **Post-build Actions**, add a post-build action **Slack Notification**
+- Configure the notifications as needed
+- Save your project
 
-Jenkins can now communicate with your repository and run pipelines from the Jenkinsfile.
+Jenkins can now communicate with your repository and run pipelines from the Jenkinsfile. You will be notified via Slack on your build actions.
 
 ## Webhooks
 
