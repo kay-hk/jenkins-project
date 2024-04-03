@@ -12,5 +12,11 @@ COPY casc.yaml /var/jenkins_home/casc.yaml
 USER root
 RUN apt-get update
 RUN apt-get install -y docker.io
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf aws awscliv2.zip
 # Switch back to the Jenkins user
 USER jenkins
