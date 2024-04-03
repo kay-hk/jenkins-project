@@ -2,7 +2,7 @@
 
 - Docker: installed and configured
 - DockerHub account
-- AWS account: IAM user with approproate permissions; key pair, created and saved to /jenkins/terraform folder
+- AWS account: IAM user with approproate permissions; key pair, created and saved to /jenkins/terraform folder; an ERC you wish to push your images into
 - GitHub account and a GitHub access token with repo permissions
 - Slack account and a workspace
 
