@@ -1,3 +1,5 @@
+This package was created as a part of Northcoders Final Project, and is included in https://github.com/AM-Doyle/NC-GitOps-HeadInTheClouds.git main repository. 
+
 ## Perquisites
 
 - Docker: installed and configured
